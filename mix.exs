@@ -9,25 +9,25 @@ defmodule EctoMaterializedPath.Mixfile do
       app: :ecto_materialized_path,
       version: @version,
       elixir: "~> 1.4",
-      elixirc_paths: elixirc_paths(Mix.env),
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       source_url: @project_url,
       homepage_url: @project_url,
-      description: "Tree structure & hierarchy for ecto models. Ancestry, materialized path, nested set, adjacency list",
+      description:
+        "Tree structure & hierarchy for ecto models. Ancestry, materialized path, nested set, adjacency list",
       package: package(),
       deps: deps()
     ]
   end
 
-
   defp elixirc_paths(:test), do: elixirc_paths() ++ ["test/support", "test/dummy"]
-  defp elixirc_paths(_),     do: elixirc_paths()
-  defp elixirc_paths,        do: ["lib"]
+  defp elixirc_paths(_), do: elixirc_paths()
+  defp elixirc_paths, do: ["lib"]
 
   def application do
     [
-      applications: app_list(Mix.env),
+      applications: app_list(Mix.env())
     ]
   end
 
@@ -37,11 +37,9 @@ defmodule EctoMaterializedPath.Mixfile do
 
   defp deps do
     [
-     {:ecto, ">= 2.0.0"},
-
-     {:ex_machina, "~> 1.0.0", only: :test},
-
-     {:ex_doc, ">= 0.0.0", only: :dev},
+      {:ecto, ">= 2.0.0"},
+      {:ex_machina, "~> 2.5", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
@@ -52,7 +50,7 @@ defmodule EctoMaterializedPath.Mixfile do
       maintainers: ["Alex Antonov"],
       licenses: ["Apache 2.0"],
       links: %{
-        "GitHub"        => @project_url,
+        "GitHub" => @project_url,
         "Author's blog" => "http://asiniy.github.io/"
       }
     ]
